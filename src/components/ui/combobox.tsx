@@ -34,7 +34,7 @@ export function Combobox({ items, value, setValue }: ComboboxProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between bg-stone-700 rounded-2xl text-white border-none hover:bg-stone-500 hover:text-white transition duration-200"
+          className="w-[200px] justify-between bg-green-700 rounded-2xl text-white border-none hover:bg-stone-500 hover:text-white transition duration-200"
         >
           {value
             ? items.find((item) => item.value == value)?.label
