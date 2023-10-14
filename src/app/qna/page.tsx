@@ -34,6 +34,9 @@ function getItems() {
 export default function Home() {
     const items = getItems()
     const [currentDocument, setCurrentDocument] = useState("")
+    const [pageStart, setPageStart] = useState(1)
+    const [pageEnd, setPageEnd] = useState(10)
+    
     const [messages, setMessages] = useState<MSG[]>([])
 
     async function handleSubmit(e: any) {
@@ -45,6 +48,8 @@ export default function Home() {
             type: "user",
         }
         setMessages(prevMessages => [...prevMessages, msg])
+
+        e.target.reset()
 
         const response = await getResponse(message)
         const botMsg: MSG = {
@@ -58,6 +63,8 @@ export default function Home() {
         const request = {
             messages: messages,
             doc: currentDocument,
+            pageStart: pageStart,
+            pageEnd: pageEnd,
         }
         console.log("Sending server", request)
         return "Hello"
@@ -69,8 +76,18 @@ export default function Home() {
 
     return (
         <div>
-            <div className="m-4">
+            <div className="flex flex-row justify-center">
+                <div className="flex flex-col justify-center align-content">
+                    <h1 className="text-5xl text-white p-4">QnA Bot</h1>
+                    <h1 className="text-xl text-white p-4">A bot that answers all your questions</h1>
+                </div>
+            </div>
+            <div className="m-4 flex flex-row gap-3 justify-center">
                 <Combobox items={items} value={currentDocument} setValue={setCurrentDocument} />
+                <Button className="text-white bg-green-700 bg-opacity-0 text-xl">Page number:&nbsp;</Button>
+                <Input className="text-white border-none bg-green-700 placeholder:text-slate-300 rounded-2xl w-12" type="text" name="pageStart" onChange={(e) => setPageStart(parseInt(e.target.value))}/>
+                <Button className="text-white bg-green-700 bg-opacity-0 text-xl">to</Button>
+                <Input className="text-white border-none bg-green-700 placeholder:text-slate-300 rounded-2xl w-12" type="text" name="pageEnd" onChange={(e) => setPageEnd(parseInt(e.target.value))}/>
             </div>
             {messages.map((msg, index) => {
                 return <Msg key={index} text={msg.text} type={msg.type} />
