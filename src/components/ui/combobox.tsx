@@ -18,44 +18,52 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-type ComboboxProps = {
-  items: { value: string; label: string }[],
-  value: string,
-  setValue: (value: string) => void,
+type Props = {
+    name: string,
+    options: { label: string; value: any }[],
+    value: any,
+    setValue: (value: any) => void,
 }
 
-export function Combobox({ items, value, setValue }: ComboboxProps) {
+export function Combobox({ name, options, value, setValue }: Props) {
   const [open, setOpen] = React.useState(false)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild className="border-none">
+      <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between bg-green-700 rounded-2xl text-white border-none hover:bg-stone-500 hover:text-white transition duration-200"
+          className="w-[200px] justify-between"
         >
           {value
-            ? items.find((item) => item.value == value)?.label
-            : "Select document..."}
+            ? options.find((option) => option.value == value)?.label
+            : `Select ${name}...`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 bg-teal-900 border-none">
-        <Command className="bg-teal-900">
-          <CommandInput className="placeholder:text-white placeholder:opacity-50" placeholder="Search document..." />
-          <CommandEmpty>No document found.</CommandEmpty>
-          <CommandGroup className="bg-teal-900">
-            {items.map((item) => (
-              <CommandItem className="bg-teal-900 text-white"
-                key={item.value}
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder={`Search ${name}s...`} />
+          <CommandEmpty>No {name} found.</CommandEmpty>
+          <CommandGroup>
+            {options.map((option) => (
+              <CommandItem
+                key={option.value}
+                value={option.value}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue)
                   setOpen(false)
                 }}
               >
-                {item.label}
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    value === option.value ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {option.label}
               </CommandItem>
             ))}
           </CommandGroup>
