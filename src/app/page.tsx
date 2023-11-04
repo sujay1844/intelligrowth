@@ -8,15 +8,42 @@ import { Button } from "@/components/ui/button"
 import { ChevronRight } from "lucide-react"
 
 const subjects = [
-  { label: "History", value: "history" },
-  { label: "Geography", value: "geography" },
-  { label: "Civics", value: "civics" },
+  { label: "Fundamental Duties", value: "fundamental duties" },
+  { label: "Federalism", value: "federalism" },
 ]
 
 const chapters = [
-  { label: "Chapter 1", value: "chapter 1"},
-  { label: "Chapter 2", value: "chapter 2"},
-  { label: "Chapter 3", value: "chapter 3"},
+  { label: "Enforcing Fundamental Duties", value: "enforcing fundamental duties" },
+  { label: "Hijab & Freedom of Religio", value: "hijab & freedom of religio" },
+  { label: "Public Orde", value: "public orde" },
+  { label: "Right to Protest", value: "right to protest" },
+  { label: "Government Aid Not a Fundamental Right: SC", value: "government aid not a fundamental right: sc" },
+  { label: "Fundamental Rights to Reside and to Move About Freely .", value: "fundamental rights to reside and to move about freely ." },
+  { label: "SC Judgement on Preventive Detention", value: "sc judgement on preventive detention" },
+  { label: "Uniform Civil Code", value: "uniform civil code" },
+  { label: "Minority Educational Institutions and Right to Education", value: "minority educational institutions and right to education" },
+  { label: "Right to Privacy", value: "right to privacy" },
+  { label: "Right to Forgotten", value: "right to forgotten" },
+  { label: "Right of Reputation vs Right to Dignity", value: "right of reputation vs right to dignity" },
+  { label: "Free Legal Aid", value: "free legal aid" },
+  { label: "Lok Adalat", value: "lok adalat" },
+  { label: "Draft Anti-Conversion Bill: Haryana", value: "draft anti-conversion bill: haryana" },
+  { label: "Role and Power of Governor", value: "role and power of governor" },
+  { label: "Governor’s Role in Universities", value: "governor’s role in universities" },
+  { label: "Governor’s Power to decide on Bills: Veto Power", value: "governor’s power to decide on bills: veto power" },
+  { label: "Chief Minister", value: "chief minister" },
+  { label: "Union' or 'Central' Government", value: "union' or 'central' government" },
+  { label: "Interim Report of J&K Delimitation Commission", value: "interim report of j&k delimitation commission" },
+  { label: "Assam-Meghalaya Border Dispute", value: "assam-meghalaya border dispute" },
+  { label: "Krishna Water Dispute", value: "krishna water dispute" },
+  { label: "Statehood Demand by Puducherry", value: "statehood demand by puducherry" },
+  { label: "Belagavi Border Dispute", value: "belagavi border dispute" },
+  { label: "Demand for Including Ladakh under Sixth Schedule", value: "demand for including ladakh under sixth schedule" },
+  { label: "Special Category Status", value: "special category status" },
+  { label: "E-ILP Platform: Manipur", value: "e-ilp platform: manipur" },
+  { label: "Legislative Council", value: "legislative council" },
+  { label: "Government of NCT of Delhi (Amendment) Ac", value: "government of nct of delhi (amendment) ac" },
+  { label: "National Panchayati Raj Day", value: "national panchayati raj day" },
 ]
 
 export default function Page() {
