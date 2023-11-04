@@ -29,6 +29,7 @@ export function Combobox({ name, options, value, setValue }: Props) {
   const [open, setOpen] = React.useState(false)
 
   return (
+    <div className="text-black">
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
@@ -70,5 +71,6 @@ export function Combobox({ name, options, value, setValue }: Props) {
         </Command>
       </PopoverContent>
     </Popover>
+    </div>
   )
 }
