@@ -57,9 +57,9 @@ export default function Page() {
     return (<div className="m-auto text-center flex flex-col gap-6">
         <h1 className="text-4xl">Question {questionNumber}</h1>
         <h2 className="text-2xl">{question}</h2>
-        <Textarea value={response} onChange={(e) => setResponse(e.target.value)}/>
+        <Textarea className="bg-stone-900" value={response} onChange={(e) => setResponse(e.target.value)}/>
 
-        <Button className="w-48 m-auto" onClick={submit}>Submit</Button>
+        <Button className="w-48 m-auto bg-gradient-to-r from-orange-400 to-green-400 text-black" onClick={submit}>Submit</Button>
         
         {submitted && (<div className="flex flex-col gap-4 text-left">
             <div className="flex flex-row gap-12">

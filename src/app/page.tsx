@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 import { Combobox } from "@/components/ui/combobox"
 import { Button } from "@/components/ui/button"
@@ -22,6 +22,7 @@ const chapters = [
 export default function Page() {
   const [subject, setSubject] = useState("")
   const [chapter, setChapter] = useState("")
+  const { push } = useRouter()
 
   const generateQuestions = () => {
     const output = {
@@ -32,7 +33,7 @@ export default function Page() {
     // Send to backend here
 
     // redirect to question page
-    redirect("/question?n=1")
+    push("/question?n=1")
   }
 
   return (<div className="flex flex-col gap-8 m-auto text-center">
