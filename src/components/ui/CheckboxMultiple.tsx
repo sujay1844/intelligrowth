@@ -69,9 +69,27 @@ export default function CheckboxReactHookFormMultiple({ setTopics }: { setTopics
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setTopics(data.topics)
-        alert(JSON.stringify(data, null, 4))
 
-        push('/question?n=1')
+        data.topics = data.topics.map((topic) => {
+            return "./data/" + topic
+        })
+
+        alert(JSON.stringify(data, null, 4))
+        
+        fetch('http://localhost:8000/qa', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                n: 5,
+                topics: data.topics,
+            })
+        }).then(res => res.json())
+        .then(data => {
+            console.log(data)
+            push('/question?n=1')
+        }).catch(err => console.log(err))
     }
 
     return (

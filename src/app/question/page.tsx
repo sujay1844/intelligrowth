@@ -8,17 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 
 const sampleAPIResponse = {
-    "expected": "New Delhi",
-    "feedback": "New Delhi is the capital of India.",
-    "missing_keywords": ['New', 'Delhi'],
-    "references": {
-        "text": [
-            { 'page_no': 45 },
-        ],
-        "yt" : [
-            { 'link': 'google.com', 'timestamp': 23 },
-        ]
-    }
+    "feedback": "",
+    "missing_keywords": [],
+    "references": ""
 }
 
 export default function Page() {
@@ -26,16 +18,22 @@ export default function Page() {
     const questionNumber = searchParams.get("n")
 
     const [question, setQuestion] = useState("")
+    const [expected, setExpected] = useState("")
     const [response, setResponse] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [apiResponse, setAPIResponse] = useState(sampleAPIResponse)
 
 
     const getQuestion = async () => {
-        // const response = await fetch("/api/question")
-        // const json = await response.json()
-        // const question = json.question
-        const question = "What is the capital of India?"
+        fetch(`http://localhost:8000/q?n=${questionNumber - 1}`, {
+            method: 'POST',
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setQuestion(data.question)
+            setExpected(data.answer)
+        }).catch(err => console.log(err))
         return question
     }
 
@@ -43,8 +41,20 @@ export default function Page() {
         const query = {
             question: question,
             response: response,
+            expected: expected,
         }
-        // send query to API
+        alert(JSON.stringify(query, null, 4))
+        fetch('http://localhost:8000/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(query)
+        }).then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setAPIResponse(data)
+        })
 
         setSubmitted(true)
         setAPIResponse(sampleAPIResponse)
@@ -71,7 +81,7 @@ export default function Page() {
 
                     <div>
                         <h2 className="text-2xl">Expected Answer</h2>
-                        <p>{apiResponse.expected}</p>
+                        <p>{expected}</p>
                     </div>
                 </div>
 
@@ -84,14 +94,7 @@ export default function Page() {
             </div>
             <div>
                 <h2 className="text-2xl">References</h2>
-                <h3 className="text-xl font-semibold">Textbook</h3>
-                <ul>
-                    {apiResponse.references.text.map((ref) => (<li key={ref.page_no}>- Page {ref.page_no}</li>))}
-                </ul>
-                <h3 className="text-xl font-semibold">YouTube</h3>
-                <ul>
-                    {apiResponse.references.yt.map((ref) => (<li key={ref.link}><a href={ref.link}>- Time: {ref.timestamp} </a></li>))}
-                </ul>
+                <p>{apiResponse.references}</p>
             </div>
             </div>)}
     </div>)
